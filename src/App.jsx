@@ -15,7 +15,7 @@ function App() {
     
     if (!csrfToken) {
       token = await getCsrfToken();
-      setCsrfToken(token);
+      setCsrfToken(null);
     }
 
     await logOut(token);
