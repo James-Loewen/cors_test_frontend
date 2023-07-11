@@ -3,6 +3,7 @@ import { getCookie } from "./utils/cookieUtils";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [CSRFToken, setCSRFToken] = useState(null);
 
   const handleLogIn = async (e) => {
     window.location.href = "https://pynoodler.pythonanywhere.com/accounts/login/";
@@ -21,8 +22,44 @@ function App() {
   }
 
   const handleLogCookie = async (e) => {
-    const csrfToken = getCookie('sessionid');
-    console.log(csrfToken);
+    const res = await fetch("https://pynoodler.pythonanywhere.com/get_csrf/", {
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log(data.token);
+
+    setCSRFToken(data.token);
+  }
+
+  const handleLogOut = async (e) => {
+    if (CSRFToken) {
+      await fetch("https://pynoodler.pythonanywhere.com/accounts/logout/", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": CSRFToken,
+        }
+      });
+      setUser(null);
+      return;
+    }
+
+    const res = await fetch("https://pynoodler.pythonanywhere.com/get_csrf/", {
+      credentials: "include",
+    });
+    const data = await res.json();
+    const token = data.token;
+    await fetch("https://pynoodler.pythonanywhere.com/accounts/logout/", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": token,
+      }
+    });
+    setUser(null);
+    return;
   }
 
   return (
@@ -37,8 +74,16 @@ function App() {
             <button onClick={() => setUser(null)}>clear</button>
           </>
         )}
-        <button onClick={handleLogCookie}>Log CSRF token</button>
+        <button onClick={handleLogCookie}>Get CSRF token</button>
+        {user && (
+          <>
+            <p>CSRF token: <span style={{color: 'coral'}}>{CSRFToken}</span></p>
+            <button onClick={() => setCSRFToken(null)}>clear</button>
+          </>
+        )}
       </div>
+      <hr/>
+      <button onClick={handleLogOut}>Log Out</button>
     </>
   )
 }
