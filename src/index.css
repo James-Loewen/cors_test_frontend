@@ -75,7 +75,7 @@ button:focus-visible {
   gap: 1rem;
 }
 
-.login-form {
+.login-form, .register-form {
   display: flex;
   flex-direction: column;
 }

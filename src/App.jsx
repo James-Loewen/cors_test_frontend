@@ -1,6 +1,6 @@
-import { LoginForm } from "./components/LoginForm";
+import { LoginOrRegister } from "./components/LoginOrRegister";
 import { useAuth } from "./context/AuthContext";
-import { getCsrfToken, logOut, loginURL } from "./utils/authUtils";
+import { getCsrfToken, logOut } from "./utils/authUtils";
 
 function App() {
   const {
@@ -9,17 +9,14 @@ function App() {
     setUser,
   } = useAuth();
 
-  const handleLogIn = async (e) => {
-    window.location.href = loginURL;
-  }
-
   const handleLogOut = async (e) => {
-    if (csrfToken) {
-      await logOut(csrfToken);
-    } else {
-      const token = await getCsrfToken();
-      await logOut(token);
+    let token = csrfToken
+    
+    if (!csrfToken) {
+      token = await getCsrfToken();
     }
+
+    await logOut(token);
     setUser(null);
   }
 
@@ -28,12 +25,9 @@ function App() {
       <h1>CORS Cookies test</h1>
       <div className="button-card">
         {user ? (
-          <p>Current user: <span style={{color: 'coral'}}>{user}</span></p>
+          <p>Current user: <code style={{color: 'coral'}}>{user}</code></p>
         ) : (
-          <LoginForm />
-        )}
-        {csrfToken && (
-          <p>CSRF token: <span style={{color: 'coral'}}>{csrfToken}</span></p>
+          <LoginOrRegister />
         )}
       </div>
       {user && (
