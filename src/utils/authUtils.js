@@ -5,7 +5,7 @@ export const loginURL = new URL("accounts/login/", BASE_URL);
 
 export const getCSRFToken = async () => {
   const url = new URL("get_csrf/", BASE_URL);
-  const res = await fetch(url);
+  const res = await fetch(url, { credentials: "include" });
   const data = await res.json();
   return data.token;
 }
