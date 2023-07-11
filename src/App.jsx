@@ -75,7 +75,7 @@ function App() {
           </>
         )}
         <button onClick={handleLogCookie}>Get CSRF token</button>
-        {user && (
+        {CSRFToken && (
           <>
             <p>CSRF token: <span style={{color: 'coral'}}>{CSRFToken}</span></p>
             <button onClick={() => setCSRFToken(null)}>clear</button>
