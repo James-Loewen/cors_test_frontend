@@ -6,6 +6,7 @@ function App() {
   const {
     user,
     csrfToken,
+    setCsrfToken,
     setUser,
   } = useAuth();
 
@@ -14,6 +15,7 @@ function App() {
     
     if (!csrfToken) {
       token = await getCsrfToken();
+      setCsrfToken(token);
     }
 
     await logOut(token);

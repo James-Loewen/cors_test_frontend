@@ -7,7 +7,11 @@ export const LoginOrRegister = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { csrfToken, setUser } = useAuth();
+  const {
+    csrfToken,
+    setCsrfToken,
+    setUser,
+  } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,6 +19,7 @@ export const LoginOrRegister = () => {
     
     if (!csrfToken) {
       token = await getCsrfToken();
+      setCsrfToken(token);
     }
 
     const data = await logIn(token, username, password);
@@ -27,6 +32,7 @@ export const LoginOrRegister = () => {
     
     if (!csrfToken) {
       token = await getCsrfToken();
+      setCsrfToken(token);
     }
 
     const data = await registerUser(token, username, password);
