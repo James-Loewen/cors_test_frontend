@@ -17,6 +17,21 @@ export const getUser = async () => {
   return data;
 }
 
+export const LogIn = async (csrfToken, username, password) => {
+  const url = new URL('my_login/', BASE_URL);
+  const res = await fetch(url, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,
+    },
+    body: JSON.stringify({ username, password }),
+  });
+  const data = await res.json();
+  return data;
+}
+
 export const logOut = async (csrfToken) => {
   const url = new URL("accounts/logout/", BASE_URL);
   await fetch(url, {

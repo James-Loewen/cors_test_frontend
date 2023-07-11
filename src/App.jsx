@@ -1,3 +1,4 @@
+import { LoginForm } from "./components/LoginForm";
 import { useAuth } from "./context/AuthContext";
 import { getCsrfToken, logOut, loginURL } from "./utils/authUtils";
 
@@ -29,7 +30,7 @@ function App() {
         {user ? (
           <p>Current user: <span style={{color: 'coral'}}>{user}</span></p>
         ) : (
-          <button onClick={handleLogIn}>Log In</button>
+          <LoginForm />
         )}
         {csrfToken && (
           <p>CSRF token: <span style={{color: 'coral'}}>{csrfToken}</span></p>
