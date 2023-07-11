@@ -1,5 +1,5 @@
-const BASE_URL = new URL("http://localhost:8000/")
-// const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
+// const BASE_URL = new URL("http://localhost:8000/")
+const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
 
 export const loginURL = new URL("accounts/login/", BASE_URL);
 
