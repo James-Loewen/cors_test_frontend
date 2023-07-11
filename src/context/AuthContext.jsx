@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getUser } from "../utils/authUtils";
 
 const AuthContext = createContext();
 
@@ -9,6 +10,20 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const [CSRFToken, setCSRFToken] = useState(null);
+
+  useEffect(() => {
+    console.log('grabbing username...');
+    (async () => {
+      const data = await getUser();
+      console.log('raw data:', data);
+      
+      if (data.user !== "anonymous") {
+        console.log('data:', data.user);
+        setUser(data.user);
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const contextData = {
     // objects
@@ -24,30 +39,9 @@ export const AuthProvider = ({ children }) => {
     setCSRFToken,
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000 * 2);
-  }, []);
-
-  useEffect(() => {
-    console.log('grabbing username...');
-    (async () => {
-      const res = await fetch('https://pynoodler.pythonanywhere.com/get_user/', {
-        credentials: 'include',
-      });
-      const data = await res.json();
-      console.log('data:', data.user);
-  
-      if (!data.user === "anonymous") {
-        setUser(data.user);
-      }
-    })();
-  }, []);
-
   if (loading) {
     return (
-      <h1>Fake loading...</h1>
+      <h1>Loading...</h1>
     )
   } else {
     return (

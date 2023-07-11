@@ -8,6 +8,8 @@ function App() {
     setUser,
   } = useAuth();
 
+  console.log('user according to <App />', user);
+
   const handleLogIn = async (e) => {
     window.location.href = loginURL;
   }

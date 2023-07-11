@@ -1,5 +1,5 @@
-// const BASE_URL = new URL("http://localhost:5173/")
-const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
+const BASE_URL = new URL("http://localhost:8000/")
+// const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
 
 export const loginURL = new URL("accounts/login/", BASE_URL);
 
@@ -8,6 +8,13 @@ export const getCSRFToken = async () => {
   const res = await fetch(url);
   const data = await res.json();
   return data.token;
+}
+
+export const getUser = async () => {
+  const url = new URL("get_user/", BASE_URL);
+  const res = await fetch(url, { credentials: "include" });
+  const data = await res.json();
+  return data;
 }
 
 export const logOut = async (CSRFToken) => {
