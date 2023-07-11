@@ -1,13 +1,18 @@
 import { getCookie } from "./utils/cookieUtils";
 
 function App() {
-
   const handleLogIn = async (e) => {
     window.location.href = "https://pynoodler.pythonanywhere.com/accounts/login/";
+    // window.location.href = "http://localhost:8000/accounts/login/"
   }
 
   const handleLogUser = async (e) => {
-    console.log('Clicked!');
+    // const res = await fetch('http://localhost:8000/get_user/', {
+    const res = await fetch('https://pynoodler.pythonanywhere.com/get_user/', {
+      credentials: 'include',
+    });
+    const data = await res.json();
+    console.log(data);
   }
 
   const handleLogCookie = async (e) => {
