@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-  const [CSRFToken, setCSRFToken] = useState(null);
+  const [csrfToken, setCsrfToken] = useState(null);
 
   useEffect(() => {
     console.log('grabbing username...');
@@ -20,8 +20,9 @@ export const AuthProvider = ({ children }) => {
       if (data.user !== "anonymous") {
         console.log('data:', data.user);
         setUser(data.user);
-        setLoading(false);
       }
+
+      setLoading(false);
     })();
   }, []);
 
@@ -30,13 +31,13 @@ export const AuthProvider = ({ children }) => {
     loading,
     error,
     user,
-    CSRFToken,
+    csrfToken,
 
     // functions
     setLoading,
     setError,
     setUser,
-    setCSRFToken,
+    setCsrfToken,
   }
 
   if (loading) {
