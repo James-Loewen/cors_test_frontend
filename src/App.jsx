@@ -16,9 +16,8 @@ function App() {
     if (csrfToken) {
       await logOut(csrfToken);
     } else {
-      const token1 = await getCsrfToken();
-      const token2 = await getCsrfToken();
-      await logOut(token1);
+      const token = await getCsrfToken();
+      await logOut(token);
     }
     setUser(null);
   }
