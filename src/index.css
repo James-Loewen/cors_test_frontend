@@ -12,6 +12,8 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+
+  --highlight-clr: coral;
 }
 
 html {
@@ -30,6 +32,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
 }
 
 button {
@@ -51,10 +54,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+code {
+  color: var(--highlight-clr);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #fefefe;
+    background-color: #fff;
+    --highlight-clr: slateblue;
   }
 
   button {
@@ -66,10 +76,14 @@ button:focus-visible {
   width: min(90vw, 400px);
 }
 
-.button-card {
+.user-info-card {
+  margin: 1rem 0;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
+  border: 2px solid var(--highlight-clr);
+  border-radius: .5rem;
 }
 
 .login-form, .register-form {
@@ -95,5 +109,5 @@ button:focus-visible {
   width: 8rem;
   background-color: transparent;
   text-decoration: underline;
-  align-self: center;
+  float: right;
 }
