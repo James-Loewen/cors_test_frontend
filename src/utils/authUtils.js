@@ -1,4 +1,3 @@
-// const BASE_URL = new URL("http://localhost:8000/")
 const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
 
 export const loginURL = new URL("accounts/login/", BASE_URL);
@@ -17,7 +16,7 @@ export const getUser = async () => {
   return data;
 }
 
-export const registerUser = async (csrfToken, username, password) => {
+export const registerUser = async (csrfToken, user) => {
   const url = new URL('register/', BASE_URL);
   const res = await fetch(url, {
     method: "POST",
@@ -26,7 +25,7 @@ export const registerUser = async (csrfToken, username, password) => {
       "Content-Type": "application/json",
       "X-CSRFToken": csrfToken,
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify(user),
   });
   const data = await res.json();
   return data;
@@ -43,8 +42,13 @@ export const logIn = async (csrfToken, username, password) => {
     },
     body: JSON.stringify({ username, password }),
   });
-  const data = await res.json();
-  return data;
+
+  if (res.status === 200) {
+    const data = await res.json();
+    return data;
+  }
+
+  throw new Error(`status: ${res.status} ${res.statusText ?? ''}`)
 }
 
 export const logOut = async (csrfToken) => {

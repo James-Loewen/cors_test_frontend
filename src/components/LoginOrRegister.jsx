@@ -4,6 +4,8 @@ import { logIn, registerUser, getCsrfToken } from "../utils/authUtils";
 
 export const LoginOrRegister = () => {
   const [register, setRegister] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,8 +24,12 @@ export const LoginOrRegister = () => {
       setCsrfToken(token);
     }
 
-    const data = await logIn(token, username, password);
-    setUser(data.user);
+    try {
+      const data = await logIn(token, username, password);
+      setUser(data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   const handleRegister = async (e) => {
@@ -35,8 +41,15 @@ export const LoginOrRegister = () => {
       setCsrfToken(token);
     }
 
-    const data = await registerUser(token, username, password);
-    setUser(data.user);
+    const userData = {
+      first_name: firstName,
+      last_name: lastName,
+      username,
+      password
+    }
+
+    const data = await registerUser(token, userData);
+    setUser(data);
   }
 
   if (!register) {
@@ -45,29 +58,51 @@ export const LoginOrRegister = () => {
         <form className="login-form" onSubmit={handleLogin}>
           <label htmlFor="username">Username</label>
           <input
+            required
             type="text"
+            id="username"
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
+            required
+            id="password"
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Log In</button>
+          <button type="submit" className="submit-btn">Log In</button>
         </form>
-        <button onClick={() => setRegister(true)}>Or sign up</button>
+        <button className="form-toggle-btn" onClick={() => setRegister(true)}>Or sign up</button>
       </>
     )
   } else {
     return (
       <>
         <form className="register-form" onSubmit={handleRegister}>
+          <h2 className="register-form__heading">Fake info, please</h2>
+          <label htmlFor="firstName">First name</label>
+          <input
+            required
+            type="text"
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label htmlFor="lastName">Last name</label>
+          <input
+            required
+            type="text"
+            name="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
           <label htmlFor="username">Username</label>
           <input
+            required
             type="text"
             name="username"
             value={username}
@@ -75,14 +110,15 @@ export const LoginOrRegister = () => {
           />
           <label htmlFor="password">Password</label>
           <input
+            required
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Register</button>
+          <button type="submit" className="submit-btn">Register</button>
         </form>
-        <button onClick={() => setRegister(false)}>Or log in</button>
+        <button className="form-toggle-btn" onClick={() => setRegister(false)}>Or log in</button>
       </>
     )
   }

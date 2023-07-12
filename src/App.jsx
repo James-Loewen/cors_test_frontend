@@ -11,12 +11,8 @@ function App() {
   } = useAuth();
 
   const handleLogOut = async (e) => {
-    let token = csrfToken
-    
-    if (!csrfToken) {
-      token = await getCsrfToken();
-      setCsrfToken(null);
-    }
+    const token = await getCsrfToken();
+    setCsrfToken(null);
 
     await logOut(token);
     setUser(null);
@@ -27,7 +23,11 @@ function App() {
       <h1>CORS Cookies test</h1>
       <div className="button-card">
         {user ? (
-          <p>Current user: <code style={{color: 'coral'}}>{user}</code></p>
+          <>
+            <p>First Name:  <code style={{color: 'coral'}}>{user.first_name}</code></p>
+            <p>Last Name:  <code style={{color: 'coral'}}>{user.last_name}</code></p>
+            <p>Username:  <code style={{color: 'coral'}}>{user.username}</code></p>
+          </>
         ) : (
           <LoginOrRegister />
         )}
