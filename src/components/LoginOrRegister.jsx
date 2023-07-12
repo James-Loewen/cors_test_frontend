@@ -87,6 +87,7 @@ export const LoginOrRegister = () => {
           <label htmlFor="firstName">First name</label>
           <input
             required
+            id="firstName"
             type="text"
             name="firstName"
             value={firstName}
@@ -95,6 +96,7 @@ export const LoginOrRegister = () => {
           <label htmlFor="lastName">Last name</label>
           <input
             required
+            id="lastName"
             type="text"
             name="lastName"
             value={lastName}
@@ -103,6 +105,7 @@ export const LoginOrRegister = () => {
           <label htmlFor="username">Username</label>
           <input
             required
+            id="username"
             type="text"
             name="username"
             value={username}
@@ -111,6 +114,7 @@ export const LoginOrRegister = () => {
           <label htmlFor="password">Password</label>
           <input
             required
+            id="password"
             type="password"
             name="password"
             value={password}
