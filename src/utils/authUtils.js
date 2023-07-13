@@ -12,8 +12,13 @@ export const getCsrfToken = async () => {
 export const getUser = async () => {
   const url = new URL("get_user/", BASE_URL);
   const res = await fetch(url, { credentials: "include" });
-  const data = await res.json();
-  return data;
+
+  if (res.status === 200) {
+    const data = await res.json();
+    return data;
+  }
+
+  throw new Error(`status ${res.status} ${res.statusText ?? ''}`);
 }
 
 export const registerUser = async (csrfToken, user) => {
@@ -48,7 +53,7 @@ export const logIn = async (csrfToken, username, password) => {
     return data;
   }
 
-  throw new Error(`status: ${res.status} ${res.statusText ?? ''}`)
+  throw new Error(`status: ${res.status} ${res.statusText ?? ''}`);
 }
 
 export const logOut = async (csrfToken) => {

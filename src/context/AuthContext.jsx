@@ -13,13 +13,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await getUser();
-      
-      if (data.user !== "anonymous") {
+      try {
+        const data = await getUser();
         setUser(data);
-        setCsrfToken(data.csrfToken);
+      } catch (err) {
+        console.error(err);
+        setUser(null);
       }
-
       setLoading(false);
     })();
   }, []);
