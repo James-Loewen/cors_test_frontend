@@ -1,4 +1,4 @@
-import { LoginOrRegister } from "./components/LoginOrRegister";
+import { AuthFormWrapper } from "./components/AuthFormWrapper";
 import { useAuth } from "./context/AuthContext";
 import { getCsrfToken, logOut } from "./utils/authUtils";
 
@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <>
+    <main>
       <h1>CORS Cookies test</h1>
       {user ? (
         <div className="user-info-card">
@@ -27,12 +27,12 @@ function App() {
           <p>Username:  <code>{user.username}</code></p>
         </div>
       ) : (
-        <LoginOrRegister />
+        <AuthFormWrapper />
       )}
       {user && (
-        <button onClick={handleLogOut}>Log Out</button>
+        <button className="logout-btn" onClick={handleLogOut}>Log Out</button>
       )}
-    </>
+    </main>
   )
 }
 

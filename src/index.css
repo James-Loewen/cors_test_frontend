@@ -1,113 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 *, *::before, *::after {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  --highlight-clr: coral;
+  --bg-clr: #E8E0AF;
+  --card-clr: #B2B894;
+  --inactive-tab-clr: #9ca182;
+  --card-radius: 1rem;
+  --submit-btn-base: #C67B39;
+  --white-clr: aliceblue;
+  --text-highlight-color: slateblue;
 }
 
 html {
-  height: 100%;
+  font-size: 16px;
+}
+
+html, body {
+  min-height: 100vh;
   width: 100vw;
 }
 
 body {
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  text-align: center;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-code {
-  color: var(--highlight-clr);
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #fff;
-    --highlight-clr: slateblue;
-  }
-
-  button {
-    background-color: #caddad;
-  }
+  background-color: var(--bg-clr);
 }
 
 #root {
-  width: min(90vw, 400px);
+  margin-top: 20vh;
+  width: min(500px, 90vw);
 }
 
-.user-info-card {
-  margin: 1rem 0;
-  padding: 1rem;
+.form-toggle-tabs {
+  height: 70px;
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  border: 2px solid var(--highlight-clr);
-  border-radius: .5rem;
+}
+
+.form-toggle-tabs li {
+  position: relative;
+  background-color: var(--inactive-tab-clr);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  top: 35px;
+  z-index: 0;
+  flex: 1;
+  transition: all ease 250ms;
+}
+
+.form-toggle-tabs li:hover {
+  top: 30px;
+}
+
+.form-toggle-tabs li.active {
+  background-color: var(--card-clr);
+  top: 30px;
+}
+
+.form-toggle-tabs button {
+  padding: .5rem 1.5rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: start;
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.auth-form-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  background-color: var(--card-clr);
+  border-radius: var(--card-radius);
 }
 
 .login-form, .register-form {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
+  display: grid;
+  gap: 0 .5rem;
 }
 
-.login-form input,
-.register-form input {
+.input-label-group label {
+  display: block;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+.input-label-group input {
+  width: 100%;
   padding: .25rem .5rem;
-  border-radius: .25rem;
+  border-radius: .5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  background-color: var(--white-clr);
 }
 
 .submit-btn {
+  justify-self: right;
   margin-top: 1rem;
-  width: 8rem;
-  align-self: end;
+  margin-bottom: .5rem;
+  padding: .25rem .5rem;
+  border: none;
+  border-radius: .5rem;
+  background-color: var(--submit-btn-base);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white-clr);
+  grid-area: btn;
 }
 
-.form-toggle-btn {
-  width: 8rem;
-  background-color: transparent;
+.login-form {
+  grid-template-areas:
+    "usr"
+    "pwd"
+    "btn";
+}
+
+.login-form__username {
+  grid-area: usr;
+}
+
+.login-form__password {
+  grid-area: pwd;
+}
+
+.register-form {
+  grid-template-areas: 
+    "hed hed"
+    "fst lst"
+    "usr usr"
+    "pw1 pw1"
+    "pw2 pw2"
+    "btn btn";
+}
+
+.register-form__heading {
+  grid-area: hed;
+  color: #456;
   text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--submit-btn-base);
+  padding-bottom: 4px;
+}
+
+.register-form__firstName {
+  grid-area: fst;
+}
+
+.register-form__lastName {
+  grid-area: lst;
+}
+
+.register-form__username {
+  grid-area: usr;
+}
+
+.register-form__password {
+  grid-area: pw1;
+}
+
+.register-form__confirm-password {
+  grid-area: pw2;
+}
+
+.user-info-card {
+  margin-top: 1.5rem;
+  padding: .75rem;
+  background-color: var(--card-clr);
+  border-radius: var(--card-radius);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.user-info-card p {
+  padding: .25rem .5rem;
+  background-color: aliceblue;
+  border-radius: .5rem;
+}
+
+.user-info-card code {
+  padding-left: .5rem;
+  font-family: monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--text-highlight-color);
+}
+
+.logout-btn {
+  padding: .25rem .5rem;
+  margin-top: .5rem;
+  margin-right: .5rem;
   float: right;
+  border: none;
+  border-radius: .5rem;
+  background-color: var(--submit-btn-base);
+  font-weight: 600;
+  color: var(--white-clr)
 }

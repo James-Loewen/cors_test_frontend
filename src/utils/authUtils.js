@@ -22,6 +22,7 @@ export const getUser = async () => {
 }
 
 export const registerUser = async (csrfToken, user) => {
+  console.log('user', user);
   const url = new URL('register/', BASE_URL);
   const res = await fetch(url, {
     method: "POST",
