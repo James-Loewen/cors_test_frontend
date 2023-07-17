@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { logIn, getCsrfToken } from "../utils/authUtils";
 import { InputLabelGroup } from "./InputLabelGroup";
 
@@ -13,6 +14,8 @@ export const LoginForm = ({
   setUsername,
   setPassword
 }) => {
+  const [error, setError] = useState(null);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     let token = csrfToken;
@@ -27,6 +30,7 @@ export const LoginForm = ({
       setUser(data);
     } catch (err) {
       console.error(err);
+      setError(err);
     }
   }
 
@@ -41,6 +45,7 @@ export const LoginForm = ({
         value={username}
         handleChange={(e) => setUsername(e.target.value)}
         parentClassName="login-form"
+        errorMsg={error}
       />
       <InputLabelGroup
         required={true}

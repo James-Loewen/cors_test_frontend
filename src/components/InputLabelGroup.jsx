@@ -6,7 +6,8 @@ export const InputLabelGroup = ({
   handleChange,
   required,
   parentClassName,
-  ...other
+  autoCapitalize,
+  errorMsg,
 }) => {
   return (
     <div className={`input-label-group ${parentClassName}__${name}`}>
@@ -18,8 +19,11 @@ export const InputLabelGroup = ({
         name={name}
         value={value}
         onChange={handleChange}
-        {...other}
+        autoCapitalize={autoCapitalize}
       />
+      {errorMsg && (
+        <div className="input-error">Invalid username or password</div>
+      )}
     </div>
   )
 }

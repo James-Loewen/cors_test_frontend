@@ -64,6 +64,7 @@ body {
 }
 
 .form-toggle-tabs button {
+  cursor: pointer;
   padding: .5rem 1.5rem;
   position: relative;
   z-index: 1;
@@ -109,7 +110,15 @@ body {
   background-color: var(--white-clr);
 }
 
+.input-label-group .input-error {
+  padding-left: 1rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: maroon;
+}
+
 .submit-btn {
+  cursor: pointer;
   justify-self: right;
   margin-top: 1rem;
   margin-bottom: .5rem;
@@ -121,6 +130,15 @@ body {
   font-weight: 500;
   color: var(--white-clr);
   grid-area: btn;
+  transition: all ease 100ms;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+}
+
+.submit-btn:active {
+  transform: scale(.95);
 }
 
 .login-form {
@@ -203,6 +221,7 @@ body {
 }
 
 .logout-btn {
+  cursor: pointer;
   padding: .25rem .5rem;
   margin-top: .5rem;
   margin-right: .5rem;
@@ -211,5 +230,14 @@ body {
   border-radius: .5rem;
   background-color: var(--submit-btn-base);
   font-weight: 600;
-  color: var(--white-clr)
+  color: var(--white-clr);
+  transition: all ease 100ms;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
+}
+
+.logout-btn:active {
+  transform: scale(.95);
 }

@@ -22,9 +22,11 @@ function App() {
       <h1>CORS Cookies test</h1>
       {user ? (
         <div className="user-info-card">
+          <p>User ID:  <code>{user.id}</code></p>
           <p>First Name:  <code>{user.first_name}</code></p>
           <p>Last Name:  <code>{user.last_name}</code></p>
           <p>Username:  <code>{user.username}</code></p>
+          <p>Date joined:  <code>{new Date(user.date_joined).toLocaleDateString()}</code></p>
         </div>
       ) : (
         <AuthFormWrapper />
