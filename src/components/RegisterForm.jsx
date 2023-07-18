@@ -41,8 +41,6 @@ export const RegisterForm = ({
       password
     }
 
-    console.log(userData);
-
     const data = await registerUser(token, userData);
     setUser(data);
   }

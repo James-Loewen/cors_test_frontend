@@ -36,7 +36,6 @@ export const registerUser = async (csrfToken, user) => {
 
   if (res.status === 201) {
     const data = await res.json();
-    console.log(data);
     return data;
   }
 
@@ -57,7 +56,6 @@ export const logIn = async (csrfToken, username, password) => {
 
   if (res.status === 200) {
     const data = await res.json();
-    console.log(data);
     return data;
   }
 
