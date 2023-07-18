@@ -1,6 +1,6 @@
 # Cross-Origin Resource Sharing & Session Cookie Front-End
 
-This project is the front-end part of my CORS Project. It is a login/registration simulator built with React + Vanilla JavaScript, styled with Vanilla CSS, and bundled with Vite. It uses the JavaScript [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make requests to the back-end part of the project which is served from an unrelated domain. These requests are authenticated via a session cookie which is passed with each request using the `credentials: 'include'` option.
+This repository is the front-end part of my CORS Project. It is a login/registration simulator built with React + Vanilla JavaScript, styled with Vanilla CSS, and bundled with Vite. It uses the JavaScript [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make requests to the back-end part of the project which is served from an unrelated domain. These requests are authenticated via a session cookie which is passed with each request using the `credentials: 'include'` option.
 
 **Table of Contents**
 
@@ -46,7 +46,7 @@ The site will be accessible at `http://localhost:5173/`
 
 ```diff
 - const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
-+ const BASE_URL = new URL("http://localhost:5173/");
++ const BASE_URL = new URL("http://localhost:8000/");
 ```
 
 <a name="functionality"></a>
