@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUser } from "../utils/authUtils";
+import { getCsrfToken, getUser } from "../utils/authUtils";
 
 const AuthContext = createContext();
 
@@ -14,8 +14,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getUser();
-        setUser(data);
+        const userData = await getUser();
+        const token = await getCsrfToken();
+        setUser(userData);
+        setCsrfToken(token);
       } catch (err) {
         console.error(err);
         setUser(null);

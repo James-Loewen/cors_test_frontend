@@ -26,8 +26,10 @@ export const LoginForm = ({
     }
 
     try {
-      const data = await logIn(token, username, password);
-      setUser(data);
+      const userData = await logIn(token, username, password);
+      token = await getCsrfToken();
+      setUser(userData);
+      setCsrfToken(token);
     } catch (err) {
       console.error(err);
       setError(err);

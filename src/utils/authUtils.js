@@ -1,7 +1,5 @@
-const BASE_URL = new URL("http://localhost:8000/");
-// const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
-
-export const loginURL = new URL("accounts/login/", BASE_URL);
+// const BASE_URL = new URL("http://localhost:8000/");
+const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
 
 export const getCsrfToken = async () => {
   const url = new URL("get_csrf/", BASE_URL);

@@ -206,18 +206,22 @@ body {
   gap: .5rem;
 }
 
-.user-info-card p {
+.user-info-card .info-group {
   padding: .25rem .5rem;
   background-color: aliceblue;
   border-radius: .5rem;
+  display: flex;
+  gap: 0 1rem;
+  flex-wrap: wrap;
 }
 
 .user-info-card code {
-  padding-left: .5rem;
+  display: inline-block;
   font-family: monospace;
   font-weight: bold;
   letter-spacing: 1px;
   color: var(--text-highlight-color);
+  overflow-wrap: anywhere;
 }
 
 .logout-btn {

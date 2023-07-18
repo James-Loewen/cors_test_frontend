@@ -34,15 +34,21 @@ export const RegisterForm = ({
       setCsrfToken(token);
     }
 
-    const userData = {
+    const reqBody = {
       first_name: firstName,
       last_name: lastName,
       username,
       password
     }
 
-    const data = await registerUser(token, userData);
-    setUser(data);
+    try {
+      const userData = await registerUser(token, reqBody);
+      token = await getCsrfToken();
+      setUser(userData);
+      setCsrfToken(token);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (

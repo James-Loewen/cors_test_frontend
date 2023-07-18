@@ -1,6 +1,6 @@
 import { AuthFormWrapper } from "./components/AuthFormWrapper";
 import { useAuth } from "./context/AuthContext";
-import { getCsrfToken, logOut } from "./utils/authUtils";
+import { logOut } from "./utils/authUtils";
 
 function App() {
   const {
@@ -9,11 +9,6 @@ function App() {
     setCsrfToken,
     setUser,
   } = useAuth();
-
-  const requestCsrfToken = async () => {
-    const token = await getCsrfToken();
-    setCsrfToken(token);
-  }
 
   const handleLogOut = async () => {
     // const token = await getCsrfToken();
@@ -31,16 +26,33 @@ function App() {
 
   return (
     <main>
-      <h1>CORS Cookies test</h1>
+      <h1>Cross-Site Resource Sharing Cookies & CSRF Token test</h1>
       {user ? (
         <div className="user-info-card">
-          <p>User ID:  <code>{user.id}</code></p>
-          <p>First Name:  <code>{user.first_name}</code></p>
-          <p>Last Name:  <code>{user.last_name}</code></p>
-          <p>Username:  <code>{user.username}</code></p>
-          <p>Date joined:  <code>{new Date(user.date_joined).toLocaleDateString()}</code></p>
-          <button onClick={requestCsrfToken}>Request CSRF Token</button>
-          <p>CSRF Token: <code style={{overflowWrap: 'break-word'}}>{csrfToken}</code></p>
+          <div className="info-group">
+            <p>User ID:</p>
+            <code>{user.id}</code>
+          </div>
+          <div className="info-group">
+            <p>First Name:</p>
+            <code>{user.first_name}</code>
+          </div>
+          <div className="info-group">
+            <p>Last Name:</p>
+            <code>{user.last_name}</code>
+          </div>
+          <div className="info-group">
+            <p>Username:</p>
+            <code>{user.username}</code>
+          </div>
+          <div className="info-group">
+            <p>Date joined:</p>
+            <code>{new Date(user.date_joined).toLocaleDateString()}</code>
+          </div>
+          <div className="info-group">
+            <p>CSRF Token:</p>
+            <code>{csrfToken}</code>
+          </div>
         </div>
       ) : (
         <AuthFormWrapper />

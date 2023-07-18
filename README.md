@@ -4,11 +4,16 @@ This project is the front-end part of my CORS Project. It is a login/registratio
 
 **Table of Contents**
 
+- **[Back-End Repository & CSRF Protection](#back-end-repository-and-csrf-protection)**
 - [Installation and Setup](#installation-and-setup)
 - [Functionality](#functionality)
-- **[CSRF Protection](#cross-site-request-forgery-csrf-protection)**
-- [Back-End Repository](#back-end-repository)
 - [License](#license)
+
+<a name="back-end-repository-and-csrf-protection"></a>
+
+## Back-End Repository and CSRF Protection
+
+For the back-end aspect of this project, or for the section on Cross-Site Request Forgery Protection, please refer to the [back-end repository](https://github.com/James-Loewen/cors_test_backend).
 
 <a name="installation-and-setup"></a>
 
@@ -58,19 +63,9 @@ The website provides the following functionality:
     - Username
     - Password
 - **User Login:** Registered users can log in using their username and password.
-- **Account Details Page:** Upon successful login, users are brought to a screen that simply displays the information they provided in order to register along with a datetime marking when they registered.
+- **Account Details Page:** Upon successful login, users are brought to a screen that simply displays the information they provided in order to register along with a datetime marking when they registered and the current CSRF token.
 
 *All accounts and all user data are automatically deleted every 24 hours.*
-
-<a name="cross-site-request-forgery-csrf-protection"></a>
-
-## **Cross-Site Request Forgery (CSRF) Protection**
-
-<a name="back-end-repository"></a>
-
-## Back-End Repository
-
-For the back-end aspect of this project, please refer to the [back-end repository](#).
 
 <a name="license"></a>
 
