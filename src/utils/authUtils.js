@@ -1,5 +1,5 @@
-// const BASE_URL = new URL("http://localhost:8000/");
-const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
+const BASE_URL = new URL("http://localhost:8000/");
+// const BASE_URL = new URL("https://pynoodler.pythonanywhere.com/");
 
 export const loginURL = new URL("accounts/login/", BASE_URL);
 
@@ -66,7 +66,7 @@ export const logIn = async (csrfToken, username, password) => {
 
 export const logOut = async (csrfToken) => {
   const url = new URL("my_logout/", BASE_URL);
-  await fetch(url, {
+  const res = await fetch(url, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -74,4 +74,8 @@ export const logOut = async (csrfToken) => {
       "X-CSRFToken": csrfToken,
     },
   });
+
+  if (res.status === 403) {
+    throw new Error("CSRF Failed.");
+  }
 }
